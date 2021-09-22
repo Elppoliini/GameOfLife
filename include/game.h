@@ -2,9 +2,8 @@
 
 class Game{
 
-
 public:
-    Game(unsigned int n);
+    Game( unsigned n);
     ~Game();
     void evolveOnce();
     void evolveNTimes(unsigned n);
@@ -18,6 +17,4 @@ private:
     unsigned int n, generation;
     bool cellAlive;
     std::vector<bool> gameboard;
-
 };
-

@@ -8,7 +8,7 @@ using namespace std;
 //0 <= x <= n-1 and 0 <= y <= n-1
 
 //Creates an object with a gameboard that is initialized to be empty
-Game::Game(unsigned int n) {
+Game::Game(unsigned int n){
     vector<bool> v(n*n, false);
     this->gameboard = v;
     this->n = n;
@@ -20,7 +20,7 @@ Game::~Game() {
 };
 
 // Updates cell status when a generation passes
-void Game::evolveOnce() {
+void Game::evolveOnce(){
         vector<bool> copy = this->gameboard;
 
         for (int x = 0; x < this->n; x++) {
@@ -42,7 +42,7 @@ void Game::evolveOnce() {
         this->generation++;
 };
 
-void Game::evolveNTimes(unsigned n) {
+void Game::evolveNTimes(unsigned n){
     for(int i = 0; i < n; i++) {
         this->evolveOnce();
     }
@@ -54,14 +54,15 @@ bool Game::getCell(unsigned x, unsigned y){
 };
 
 //set a value to a certain cell
-void Game::setCell(unsigned x, unsigned y, bool value) {
+void Game::setCell(unsigned x, unsigned y, bool value){
     this->gameboard.at(x + y*this->n) = value;
 };
 
 //Check how many neighbours a cell has by checking the cell surroundings
-unsigned Game::neighbourCount(unsigned x, unsigned y) {
+unsigned Game::neighbourCount(unsigned x, unsigned y){
     int neighbours = 0;
-    for (int xOffset = -1; xOffset <= 1; xOffset++) {
+
+    for (int xOffset = -1; xOffset <= 1; xOffset++){
         bool cellOutsideXBounds = xOffset + x < 0 || xOffset + x >= this->n;
         if (cellOutsideXBounds) {
             continue;
@@ -85,7 +86,7 @@ unsigned Game::neighbourCount(unsigned x, unsigned y) {
 };
 
 //prints current board
-void Game::printBoard() {
+void Game::printBoard(){
     for(unsigned y = 0; y < this->n; y++) {
         for(unsigned x = 0; x < this->n; x++) {
             if(this->getCell(x, y)) cout << "1";
@@ -96,9 +97,8 @@ void Game::printBoard() {
     cout << "\n\n";
 };
 
-
 // randomly chooses cells from board to put them alive
-void Game::initBoardRandomly() {
+void Game::initBoardRandomly(){
     int x = 0;
     srand((unsigned)time( NULL ));
     
@@ -113,6 +113,3 @@ void Game::initBoardRandomly() {
         x++;
     }
 };
-
-
-
