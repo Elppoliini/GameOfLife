@@ -3,14 +3,10 @@
 class UI {
 
 public:
-    UI();
+    UI(unsigned width, unsigned height);
     ~UI();
     void run();
 
-
-
 private:
-    
-
-
+    unsigned windowWidth, windowHeight, buttonBackgroundWidth, buttonBackgroundHeight;
 };

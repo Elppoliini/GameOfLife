@@ -1,28 +1,74 @@
 #include "../include/ui.h"
+#include "../include/button.h"
+#include "../include/gameboard.h"
+#include <iostream>
 
-UI::UI(){
-
+//Creates an object
+UI::UI(unsigned width, unsigned height){
+    this->windowWidth = width;
+    this->windowHeight = height;
+    this->buttonBackgroundWidth = 0.3 * width;
+    this->buttonBackgroundHeight = height;
 };
 
 UI::~UI(){
 
 };
+
+//
 void UI::run(){
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode(this->windowWidth, this->windowHeight), "Game of Life");
+    unsigned n = 10;
+    Game game = Game(n);
+    /* test shape to try out the game
+    game.setCell(3,3,true);
+    game.setCell(5,3,true);
+    game.setCell(5,4,true);
+    game.setCell(5,2,true);
+    game.setCell(4,4,true);*/
+    window.setFramerateLimit(60);
+    sf::RectangleShape buttonBackground(sf::Vector2f(this->buttonBackgroundWidth, this->buttonBackgroundHeight));
+    buttonBackground.setFillColor(sf::Color(245,175,105));
+    float buttonBackgroundXpos = 0.7*this->windowWidth;
+    float buttonBackgroundYpos = 0.f;
+    buttonBackground.setPosition(buttonBackgroundXpos, buttonBackgroundYpos);
+
+    float gameButtonXpos = buttonBackgroundXpos * 1.09;
+    float gameButtonWidth = this->buttonBackgroundWidth * 0.6;
+    float gameButtonHeight = this->buttonBackgroundHeight * 0.1;
+    float startButtonYpos = buttonBackgroundYpos + 100;
+    Button startButton = Button(gameButtonXpos, startButtonYpos, gameButtonWidth, gameButtonHeight, 255,155,65);
+    float nextButtonYpos = buttonBackgroundYpos + 400;
+    Button nextButton = Button(gameButtonXpos, nextButtonYpos, gameButtonWidth, gameButtonHeight, 255,155,65);
+    Gameboard gameboard = Gameboard(0, 0, buttonBackgroundXpos, this->windowHeight, n);
 
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed) {
                 window.close();
+            } else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+
+                if(startButton.insideButton(event.mouseButton.x, event.mouseButton.y)) {
+                    std::cout<< "START pressed\n";
+                }  else if(nextButton.insideButton(event.mouseButton.x, event.mouseButton.y)) {
+                    std::cout<< "NEXT pressed\n";
+                    game.evolveOnce();
+                } else if(gameboard.insideGameboard(event.mouseButton.x, event.mouseButton.y)) {
+                    std::pair<unsigned, unsigned> cellPos = gameboard.coordinatesToCellIndex(event.mouseButton.x, event.mouseButton.y);
+                    bool state = game.getCell(cellPos.first, cellPos.second);
+                    game.setCell(cellPos.first, cellPos.second, !state);
+                }
+            }
         }
 
-        window.clear();
-        window.draw(shape);
+        window.clear(sf::Color::White);
+        window.draw(buttonBackground);
+        window.draw(startButton.draw());
+        window.draw(nextButton.draw());
+        gameboard.draw(window, game);
         window.display();
     }
 };
