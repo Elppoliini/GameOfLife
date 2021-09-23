@@ -12,6 +12,7 @@ public:
     unsigned neighbourCount(unsigned x, unsigned y);
     void printBoard();
     void initBoardRandomly();
+    void reset();
 
 private:
     unsigned int n, generation;

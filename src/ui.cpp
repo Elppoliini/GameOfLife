@@ -40,8 +40,10 @@ void UI::run(){
     float gameButtonHeight = this->buttonBackgroundHeight * 0.1;
     float startButtonYpos = buttonBackgroundYpos + 100;
     Button startButton = Button(gameButtonXpos, startButtonYpos, gameButtonWidth, gameButtonHeight, 255,155,65, "Auto-play");
-    float nextButtonYpos = buttonBackgroundYpos + 400;
+    float nextButtonYpos = buttonBackgroundYpos + 200;
     Button nextButton = Button(gameButtonXpos, nextButtonYpos, gameButtonWidth, gameButtonHeight, 255,155,65, "Next");
+    float resetButtonYpos = buttonBackgroundYpos + 300;
+    Button resetButton = Button(gameButtonXpos, resetButtonYpos, gameButtonWidth, gameButtonHeight, 255,155,65, "Reset");
     Gameboard gameboard = Gameboard(0, 0, buttonBackgroundXpos, this->windowHeight, this->n);
 
     while (window.isOpen())
@@ -56,9 +58,11 @@ void UI::run(){
                 if(startButton.insideButton(event.mouseButton.x, event.mouseButton.y)) {
                     startPressed = !startPressed;
                     std::cout<< "START pressed\n";
-                }  else if(nextButton.insideButton(event.mouseButton.x, event.mouseButton.y)) {
+                } else if(nextButton.insideButton(event.mouseButton.x, event.mouseButton.y)) {
                     std::cout<< "NEXT pressed\n";
                     game.evolveOnce();
+                } else if(resetButton.insideButton(event.mouseButton.x, event.mouseButton.y)) {
+                    game.reset();
                 } else if(gameboard.insideGameboard(event.mouseButton.x, event.mouseButton.y)) {
                     std::pair<unsigned, unsigned> cellPos = gameboard.coordinatesToCellIndex(event.mouseButton.x, event.mouseButton.y);
                     bool state = game.getCell(cellPos.first, cellPos.second);
@@ -68,11 +72,11 @@ void UI::run(){
 
         }
 
-
         window.clear(sf::Color::White);
         window.draw(buttonBackground);
         startButton.draw(window);
         nextButton.draw(window);
+        resetButton.draw(window);
         gameboard.draw(window, game);
         window.display();
         sf::Time elapsed = clock.getElapsedTime();

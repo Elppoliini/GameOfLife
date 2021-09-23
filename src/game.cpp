@@ -113,3 +113,7 @@ void Game::initBoardRandomly(){
         x++;
     }
 };
+
+void Game::reset(){
+    this->gameboard.assign(this->n*this->n, false);
+};
