@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 
-class UI {
+class UI
+{
 
 public:
     UI(unsigned n);

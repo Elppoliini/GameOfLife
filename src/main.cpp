@@ -7,24 +7,31 @@
 #include <SFML/Graphics.hpp>
 #include <stdexcept>
 
-int main(int argc, char **argv){
+int main(int argc, char **argv)
+{
     unsigned n;
 
-    if(argc != 2) {
+    if (argc != 2)
+    {
         std::cout << "Invalid amount of arguments" << std::endl;
         return 1;
     }
-    try {
+    try
+    {
         n = std::stol(argv[1]);
     }
-    catch (std::invalid_argument &e){
+    catch (std::invalid_argument &e)
+    {
         std::cout << "Invalid argument. Argument must be unsigned positive integer" << std::endl;
         return 1;
-    } catch(std::out_of_range &e){
+    }
+    catch (std::out_of_range &e)
+    {
         std::cout << "Integer value is out of range" << std::endl;
         return 1;
     }
-    if(n == 0){
+    if (n == 0)
+    {
         std::cout << "Integer value is not positive" << std::endl;
         return 1;
     }

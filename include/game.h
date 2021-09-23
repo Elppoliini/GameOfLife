@@ -1,9 +1,10 @@
 #include <vector>
 
-class Game{
+class Game
+{
 
 public:
-    Game( unsigned n);
+    Game(unsigned n);
     ~Game();
     void evolveOnce();
     void evolveNTimes(unsigned n);
