@@ -126,18 +126,15 @@ void Game::initBoardRandomly()
     int x = 0;
     srand((unsigned)time(NULL));
 
-    while (x < this->n)
+    for (int y = 0; y < this->n; y++)
     {
-        int y = 0;
-        while (y < this->n)
+        for (int x = 0; x < this->n; x++)
         {
-            if ((float)rand() / RAND_MAX < 0.2)
+            if ((float)rand() / RAND_MAX < 0.4)
             {
                 this->setCell(x, y, true);
             }
-            y++;
         }
-        x++;
     }
 };
 

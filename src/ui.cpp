@@ -48,6 +48,8 @@ void UI::run()
     Button nextButton = Button(gameButtonXpos, nextButtonYpos, gameButtonWidth, gameButtonHeight, 255, 155, 65, "Next");
     float resetButtonYpos = buttonPanelYpos + 300;
     Button resetButton = Button(gameButtonXpos, resetButtonYpos, gameButtonWidth, gameButtonHeight, 255, 155, 65, "Reset");
+    float randomButtonYpos = buttonPanelYpos + 400;
+    Button randomButton = Button(gameButtonXpos, randomButtonYpos, gameButtonWidth, gameButtonHeight, 255, 155, 65, "Randomize");
 
     Gameboard gameboard = Gameboard(0, 0, buttonPanelXpos, this->windowHeight, this->n);
 
@@ -77,6 +79,11 @@ void UI::run()
                     game.reset();
                     autoPlayOn = false;
                 }
+                else if (randomButton.insideButton(event.mouseButton.x, event.mouseButton.y))
+                {
+                    game.reset();
+                    game.initBoardRandomly();
+                }
                 else if (gameboard.insideGameboard(event.mouseButton.x, event.mouseButton.y))
                 {
                     std::pair<unsigned, unsigned> cellPos = gameboard.coordinatesToCell(event.mouseButton.x, event.mouseButton.y);
@@ -100,6 +107,7 @@ void UI::run()
         autoPlayButton.draw(window);
         nextButton.draw(window);
         resetButton.draw(window);
+        randomButton.draw(window);
         window.draw(this->generation);
         gameboard.draw(window, game);
 
