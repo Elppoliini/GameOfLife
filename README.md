@@ -15,10 +15,6 @@
 
 ## Compiling
 
-Create a build folder:
-
-`mkdir build`
-
 Build project by running:
 
 `make`

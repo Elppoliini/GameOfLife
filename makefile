@@ -6,8 +6,11 @@ EXECUTABLE_FILE_NAME = gameoflife
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system
 
 
-all: main.o game.o ui.o button.o gameboard.o
+all: mkbuilddir main.o game.o ui.o button.o gameboard.o
 	g++ -o $(BUILD_DIR)/$(EXECUTABLE_FILE_NAME) $(BUILD_DIR)/*.o $(LIBS)
+
+mkbuilddir:
+	mkdir -p build
 
 main.o: $(SRC_DIR)/main.cpp 
 	g++ -c $(SRC_DIR)/main.cpp -o $(BUILD_DIR)/main.o
