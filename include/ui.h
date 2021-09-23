@@ -9,7 +9,7 @@ public:
     void run();
 
 private:
-    unsigned windowWidth, windowHeight, buttonBackgroundWidth, buttonBackgroundHeight, n;
+    unsigned windowWidth, windowHeight, buttonPanelWidth, buttonPanelHeight, n;
     sf::Text generation;
     sf::Font font;
 };

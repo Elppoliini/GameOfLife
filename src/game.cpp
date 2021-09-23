@@ -4,10 +4,10 @@
 #include <vector>
 using namespace std;
 
-//All functions that use coordinates assume that they are within bounds
-//0 <= x <= n-1 and 0 <= y <= n-1
+// All functions that use coordinates assume that they are within bounds
+// 0 <= x <= n-1 and 0 <= y <= n-1
 
-//Creates an object with a gameboard that is initialized to be empty
+// Creates an object with a gameboard that is initialized to be empty
 Game::Game(unsigned int n)
 {
     vector<bool> v(n * n, false);
@@ -57,19 +57,19 @@ void Game::evolveNTimes(unsigned n)
     }
 };
 
-// return cell location
+// Returns cell location
 bool Game::getCell(unsigned x, unsigned y)
 {
     return this->gameboard.at(x + y * this->n);
 };
 
-//set a value to a certain cell
+// Sets a value to a certain cell
 void Game::setCell(unsigned x, unsigned y, bool value)
 {
     this->gameboard.at(x + y * this->n) = value;
 };
 
-//Check how many neighbours a cell has by checking the cell surroundings
+// Checks how many neighbours a cell has by checking the cell surroundings
 unsigned Game::neighbourCount(unsigned x, unsigned y)
 {
     int neighbours = 0;
@@ -103,7 +103,7 @@ unsigned Game::neighbourCount(unsigned x, unsigned y)
     return neighbours;
 };
 
-//prints current board
+// Prints current board
 void Game::printBoard()
 {
     for (unsigned y = 0; y < this->n; y++)
@@ -120,7 +120,7 @@ void Game::printBoard()
     cout << "\n\n";
 };
 
-// randomly chooses cells from board to put them alive
+// Randomly chooses cells from board to put them alive
 void Game::initBoardRandomly()
 {
     int x = 0;
@@ -141,12 +141,14 @@ void Game::initBoardRandomly()
     }
 };
 
+// Resets game board and generation count
 void Game::reset()
 {
     this->gameboard.assign(this->n * this->n, false);
     this->generation = 0;
 };
 
-unsigned Game::getGen(){
+unsigned Game::getGen()
+{
     return this->generation;
 };

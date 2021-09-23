@@ -6,7 +6,7 @@ class Button
 public:
     Button(float x, float y, float width, float height, unsigned r, unsigned g, unsigned b, std::string text);
     ~Button();
-    sf::RectangleShape draw(sf::RenderWindow &window);
+    void draw(sf::RenderWindow &window);
     bool insideButton(float x, float y);
 
 private:

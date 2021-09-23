@@ -15,7 +15,7 @@ Gameboard::~Gameboard(){
 
 };
 
-//draw a cell to gameboard
+// Draws a cell to gameboard
 void Gameboard::draw(sf::RenderWindow &window, Game &game)
 {
     for (int y = 0; y < n; y++)
@@ -35,14 +35,14 @@ void Gameboard::draw(sf::RenderWindow &window, Game &game)
     }
 };
 
-//Check that given coordinates are inside the gameboard area
+// Checks that given coordinates are inside the gameboard area
 bool Gameboard::insideGameboard(float x, float y)
 {
     return this->rect.contains(x, y);
 };
 
-//Get coordinates to a cell
-std::pair<unsigned, unsigned> Gameboard::coordinatesToCellIndex(float x, float y)
+// Gets coordinates to a cell
+std::pair<unsigned, unsigned> Gameboard::coordinatesToCell(float x, float y)
 {
     unsigned cellX = x * this->n / this->width;
     unsigned cellY = y * this->n / this->height;

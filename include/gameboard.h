@@ -10,7 +10,7 @@ public:
     ~Gameboard();
     void draw(sf::RenderWindow &window, Game &game);
     bool insideGameboard(float x, float y);
-    std::pair<unsigned, unsigned> coordinatesToCellIndex(float x, float y);
+    std::pair<unsigned, unsigned> coordinatesToCell(float x, float y);
 
 private:
     float x, y, width, height;

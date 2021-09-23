@@ -1,7 +1,7 @@
 #include "../include/button.h"
 #include <iostream>
 
-//Creates an object
+// Creates an object
 Button::Button(float x, float y, float width, float height, unsigned r, unsigned g, unsigned b, std::string text)
 {
     this->x = x;
@@ -24,18 +24,17 @@ Button::~Button(){
 
 };
 
-//
-sf::RectangleShape Button::draw(sf::RenderWindow &window)
+// Draws button to GUI window
+void Button::draw(sf::RenderWindow &window)
 {
     sf::RectangleShape button(sf::Vector2f(this->width, this->height));
     button.setFillColor(sf::Color(this->r, this->g, this->b));
     button.setPosition(this->x, this->y);
     window.draw(button);
     window.draw(this->text);
-    return button;
 };
 
-// check that given coordinates are inside the button area
+// Checks that given coordinates are inside the button area
 bool Button::insideButton(float x, float y)
 {
     return this->rect.contains(x, y);
