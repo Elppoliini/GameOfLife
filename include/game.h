@@ -14,6 +14,7 @@ public:
     void printBoard();
     void initBoardRandomly();
     void reset();
+    unsigned getGen();
 
 private:
     unsigned int n, generation;

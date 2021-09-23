@@ -10,4 +10,6 @@ public:
 
 private:
     unsigned windowWidth, windowHeight, buttonBackgroundWidth, buttonBackgroundHeight, n;
+    sf::Text generation;
+    sf::Font font;
 };

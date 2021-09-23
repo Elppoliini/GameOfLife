@@ -11,6 +11,10 @@ UI::UI(unsigned n)
     this->buttonBackgroundWidth = 0.3 * this->windowWidth;
     this->buttonBackgroundHeight = this->windowHeight;
     this->n = n;
+    this->font.loadFromFile("assets/ubuntu.mono.ttf");
+    this->generation.setFont(this->font);
+    this->generation.setCharacterSize(32);
+    this->generation.setFillColor(sf::Color::Black);
 };
 
 UI::~UI(){
@@ -73,6 +77,7 @@ void UI::run()
                 else if (resetButton.insideButton(event.mouseButton.x, event.mouseButton.y))
                 {
                     game.reset();
+                    startPressed = false;
                 }
                 else if (gameboard.insideGameboard(event.mouseButton.x, event.mouseButton.y))
                 {
@@ -84,11 +89,15 @@ void UI::run()
         }
 
         window.clear(sf::Color::White);
-        ;
         window.draw(buttonBackground);
+        std::string genInfo= "Generation: ";
+        genInfo.append(std::to_string(game.getGen()));
+        this->generation.setString(genInfo);
+        this->generation.setPosition(buttonBackgroundXpos * 1.02, this->windowHeight - 50);
         startButton.draw(window);
         nextButton.draw(window);
         resetButton.draw(window);
+        window.draw(this->generation);
         gameboard.draw(window, game);
         window.display();
         sf::Time elapsed = clock.getElapsedTime();

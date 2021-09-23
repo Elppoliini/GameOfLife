@@ -144,4 +144,9 @@ void Game::initBoardRandomly()
 void Game::reset()
 {
     this->gameboard.assign(this->n * this->n, false);
+    this->generation = 0;
+};
+
+unsigned Game::getGen(){
+    return this->generation;
 };
