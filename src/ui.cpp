@@ -39,9 +39,9 @@ void UI::run(){
     float gameButtonWidth = this->buttonBackgroundWidth * 0.6;
     float gameButtonHeight = this->buttonBackgroundHeight * 0.1;
     float startButtonYpos = buttonBackgroundYpos + 100;
-    Button startButton = Button(gameButtonXpos, startButtonYpos, gameButtonWidth, gameButtonHeight, 255,155,65);
+    Button startButton = Button(gameButtonXpos, startButtonYpos, gameButtonWidth, gameButtonHeight, 255,155,65, "Auto-play");
     float nextButtonYpos = buttonBackgroundYpos + 400;
-    Button nextButton = Button(gameButtonXpos, nextButtonYpos, gameButtonWidth, gameButtonHeight, 255,155,65);
+    Button nextButton = Button(gameButtonXpos, nextButtonYpos, gameButtonWidth, gameButtonHeight, 255,155,65, "Next");
     Gameboard gameboard = Gameboard(0, 0, buttonBackgroundXpos, this->windowHeight, this->n);
 
     while (window.isOpen())
@@ -71,8 +71,8 @@ void UI::run(){
 
         window.clear(sf::Color::White);
         window.draw(buttonBackground);
-        window.draw(startButton.draw());
-        window.draw(nextButton.draw());
+        startButton.draw(window);
+        nextButton.draw(window);
         gameboard.draw(window, game);
         window.display();
         sf::Time elapsed = clock.getElapsedTime();

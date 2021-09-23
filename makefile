@@ -1,6 +1,7 @@
 SRC_DIR = ./src
 INC_DIR = ./include
 BUILD_DIR = ./build
+ASS_DIR = ./assets
 EXECUTABLE_FILE_NAME = gameoflife
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system
 
